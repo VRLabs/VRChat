@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5994186445648892840}
   - component: {fileID: 2651829452066541466}
   - component: {fileID: 2651829452066541467}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: worldSpace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2650349966367823372}
   - component: {fileID: 2652502266887697675}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 4675479491854215220}
   - component: {fileID: 6488864815603518170}
   - component: {fileID: 5529820013220824619}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
