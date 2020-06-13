@@ -167,7 +167,7 @@ Shader "VRLabs/Particle Shader"
                 #pragma fragment fragParticleUnlit
                 #pragma multi_compile_instancing
 
-                #include "CGINC/ParticleIncludes.cginc"
+                #include "CGINC/ParticleShaderIncludes.cginc"
                 ENDCG
             }
         }
