@@ -108,8 +108,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8778366730372235867}
   - component: {fileID: 8778366730372235868}
+  - component: {fileID: 5102149251778879637}
   m_Layer: 0
-  m_Name: markerGestureOn
+  m_Name: Draw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,6 +150,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5102149251778879637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8778366730372235869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0460acd2569e0bd4ca0ee72ec90d5587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  markerMesh: {fileID: 8778366730310455473}
+  trail: {fileID: 8778366730832513889}
+  markerColor: {r: 1, g: 1, b: 1, a: 1}
+  trailColor: {r: 1, g: 1, b: 1, a: 1}
+  DrawGesture: 0
+  ResetGesture: 3
+  AddToCurrentAnimation: 0
+  emptyController: {fileID: 22100000, guid: 7a65a285657dca2458bf650b0611c227, type: 2}
 --- !u!1 &8778366730832513892
 GameObject:
   m_ObjectHideFlags: 0

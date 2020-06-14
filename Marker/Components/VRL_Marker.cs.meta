@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0460acd2569e0bd4ca0ee72ec90d5587
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - markerMesh: {instanceID: 0}
+  - trail: {instanceID: 0}
+  - emptyController: {fileID: 22100000, guid: 7a65a285657dca2458bf650b0611c227, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
