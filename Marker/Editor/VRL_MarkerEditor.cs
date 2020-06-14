@@ -20,8 +20,6 @@ namespace VRLabs.Marker
         private Material markerMaterial;
         private Material trailMaterial;
 
-        private GUIStyle errorStyle = new GUIStyle();
-
         /// <summary>
         /// Text displayed into the ui
         /// </summary>
@@ -31,7 +29,7 @@ namespace VRLabs.Marker
             public static GUIContent MarkerColorContent = new GUIContent("Marker color", "Color of the marker");
             public static GUIContent TrailColorContent = new GUIContent("Trail color", "Color of the trail");
             public static GUIContent DrawGestureContent = new GUIContent("Draw gesture", "Gesture used to draw with the marker");
-            public static GUIContent ResetGestureContent = new GUIContent("Reset gesture", "Gesture used to reset the marker");
+            public static GUIContent ResetGestureContent = new GUIContent("Erase gesture", "Gesture used to reset the marker");
         }
 
         public override void OnInspectorGUI()
@@ -39,25 +37,50 @@ namespace VRLabs.Marker
             //Initializes some properties and checks if the prefab is inside an avatar
             if (isFirstCycle)
             {
+                // Preemptive check on missing references
+                marker = (VRL_Marker)target;
+                if (marker.emptyController == null || marker.markerMesh == null || marker.trail == null)
+                {
+                    EditorGUILayout.HelpBox("The script couldn't find one or more of its dependencies. Redownload the .unitypackage file.", MessageType.Error);
+                    return;
+                }
+                isFirstCycle = false;
                 marker = (VRL_Marker)target;
                 GameObject item = marker.gameObject;
-                markerMaterial = new Material(marker.markerMesh.sharedMaterial);
-                trailMaterial = new Material(marker.trail.sharedMaterial);
-
-                errorStyle.normal.textColor = Color.red;
                 ObjectPath.Append(item.name);
                 avatarDescriptor = FindAvatarRoot(item);
-                isDescriptorFound = avatarDescriptor == null;
-                isFirstCycle = false;
+                // Checks if inside a valid avatar
+                if (avatarDescriptor?.GetComponent<Animator>() == null)
+                {
+                    isDescriptorFound = false;
+                }
+                else
+                {
+                    Animator avatarAnimator = avatarDescriptor.GetComponent<Animator>();
+
+                    if (!avatarAnimator.isHuman)
+                    {
+                        isDescriptorFound = false;
+                    }
+                    else
+                    {
+                        isDescriptorFound = true;
+
+                        markerMaterial = new Material(marker.markerMesh.sharedMaterial);
+                        trailMaterial = new Material(marker.trail.sharedMaterial);
+                    }
+                }
+
+
             }
 
             //UI starts drawing here
-            if (isDescriptorFound)
+            if (!isDescriptorFound)
             {
-                EditorGUILayout.LabelField("This marker is not under any avatar, please put this prefab inside an avatar", errorStyle);
+                EditorGUILayout.HelpBox("This marker is not under any avatar, please put this prefab inside an Humanoid Avatar with a VRC_AvatarDescriptor component", MessageType.Error);
             }
 
-            EditorGUI.BeginDisabledGroup(isDescriptorFound);
+            EditorGUI.BeginDisabledGroup(!isDescriptorFound);
             marker.markerColor = EditorGUILayout.ColorField(Content.MarkerColorContent, marker.markerColor);
             marker.trailColor = EditorGUILayout.ColorField(Content.TrailColorContent, marker.trailColor);
             marker.DrawGesture = (Gesture)EditorGUILayout.EnumPopup(Content.DrawGestureContent, marker.DrawGesture);
@@ -76,12 +99,17 @@ namespace VRLabs.Marker
         /// </summary>
         private void GenerateMarker()
         {
-            if (avatarDescriptor.GetComponent<Animator>() == null)
+            // Added more security checks in case someone manages to break stuff right before generation
+            if (marker.emptyController == null || marker.markerMesh == null || marker.trail == null)
+            {
+                EditorUtility.DisplayDialog("Error Generating Marker", "The script couldn't find one or more of its dependencies. Redownload the .unitypackage file.", "Close");
+                return;
+            }
+            if (avatarDescriptor?.GetComponent<Animator>() == null)
             {
                 EditorUtility.DisplayDialog("Error Generating Marker", "Your VRChat avatar must have an animator and be humanoid.", "Close");
                 return;
             }
-
             Animator avatarAnimator = avatarDescriptor.GetComponent<Animator>();
 
             if (!avatarAnimator.isHuman)
@@ -90,6 +118,7 @@ namespace VRLabs.Marker
                 return;
             }
 
+            // Apply material color and generate assets
             markerMaterial.color = marker.markerColor;
             trailMaterial.color = marker.trailColor;
 
@@ -104,6 +133,7 @@ namespace VRLabs.Marker
             AssetDatabase.CreateAsset(trailMaterial, "Assets/VRLabs/Marker/GeneratedResources/" + fileName + ".mat");
             marker.trail.sharedMaterial = trailMaterial;
 
+            // Generate ovverride controller if necessary
             if (avatarDescriptor.CustomStandingAnims == null || avatarDescriptor.CustomSittingAnims == null)
             {
                 AnimatorOverrideController newOverrideController = new AnimatorOverrideController(marker.emptyController);
@@ -119,6 +149,8 @@ namespace VRLabs.Marker
                 }
             }
 
+            // Generate animation clips 
+            // TODO: advanced check for already existing animations and adding to them instead
             AnimationClip drawAnim = new AnimationClip();
             AnimationCurve curve = new AnimationCurve(new Keyframe[] { new Keyframe(0, 1), new Keyframe(1f / 60, 1) });
             drawAnim.SetCurve(ObjectPath.ToString(), typeof(Behaviour), "m_Enabled", curve);
@@ -134,6 +166,7 @@ namespace VRLabs.Marker
             SetAnimationGesture(avatarDescriptor, marker.DrawGesture, drawAnim);
             SetAnimationGesture(avatarDescriptor, marker.ResetGesture, resetAnim);
 
+            //Remove this component
             DestroyImmediate(marker);
 
         }
