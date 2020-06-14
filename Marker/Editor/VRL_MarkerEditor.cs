@@ -30,6 +30,8 @@ namespace VRLabs.Marker
             public static GUIContent GenerateButtonContent = new GUIContent("Generate marker", "Generates all the animations needed for the marker and deletes this component");
             public static GUIContent MarkerColorContent = new GUIContent("Marker color", "Color of the marker");
             public static GUIContent TrailColorContent = new GUIContent("Trail color", "Color of the trail");
+            public static GUIContent DrawGestureContent = new GUIContent("Draw gesture", "Gesture used to draw with the marker");
+            public static GUIContent ResetGestureContent = new GUIContent("Reset gesture", "Gesture used to reset the marker");
         }
 
         public override void OnInspectorGUI()
@@ -56,10 +58,10 @@ namespace VRLabs.Marker
             }
 
             EditorGUI.BeginDisabledGroup(isDescriptorFound);
-            marker.DrawGesture = (Gesture)EditorGUILayout.EnumPopup(Content.GenerateButtonContent, marker.DrawGesture);
-            marker.ResetGesture = (Gesture)EditorGUILayout.EnumPopup(Content.GenerateButtonContent, marker.ResetGesture);
             marker.markerColor = EditorGUILayout.ColorField(Content.MarkerColorContent, marker.markerColor);
             marker.trailColor = EditorGUILayout.ColorField(Content.TrailColorContent, marker.trailColor);
+            marker.DrawGesture = (Gesture)EditorGUILayout.EnumPopup(Content.DrawGestureContent, marker.DrawGesture);
+            marker.ResetGesture = (Gesture)EditorGUILayout.EnumPopup(Content.ResetGestureContent, marker.ResetGesture);
             if (GUILayout.Button(Content.GenerateButtonContent))
             {
                 GenerateMarker();
