@@ -4,11 +4,19 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Camera
+    100004: Light
+    100006: Marker
     400000: //RootNode
+    400002: Camera
+    400004: Light
+    400006: Marker
     2100000: No Name
     2100002: Material.001
     2300000: //RootNode
+    2300002: Marker
     3300000: //RootNode
+    3300002: Marker
     4300000: Marker
   externalObjects:
   - first:
