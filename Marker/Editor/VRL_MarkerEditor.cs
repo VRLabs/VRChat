@@ -30,6 +30,7 @@ namespace VRLabs.Marker
             public static GUIContent TrailColorContent = new GUIContent("Trail color", "Color of the trail");
             public static GUIContent DrawGestureContent = new GUIContent("Draw gesture", "Gesture used to draw with the marker");
             public static GUIContent ResetGestureContent = new GUIContent("Erase gesture", "Gesture used to reset the marker");
+            public static GUIContent AddToCurrentContent = new GUIContent("Add to current animations", "Adds the needed keyframes to your current");
         }
 
         public override void OnInspectorGUI()
@@ -85,6 +86,7 @@ namespace VRLabs.Marker
             marker.trailColor = EditorGUILayout.ColorField(Content.TrailColorContent, marker.trailColor);
             marker.DrawGesture = (Gesture)EditorGUILayout.EnumPopup(Content.DrawGestureContent, marker.DrawGesture);
             marker.ResetGesture = (Gesture)EditorGUILayout.EnumPopup(Content.ResetGestureContent, marker.ResetGesture);
+            marker.AddToCurrentAnimation = EditorGUILayout.Toggle(Content.AddToCurrentContent, marker.AddToCurrentAnimation);
             if (GUILayout.Button(Content.GenerateButtonContent))
             {
                 GenerateMarker();
@@ -151,26 +153,78 @@ namespace VRLabs.Marker
 
             // Generate animation clips 
             // TODO: advanced check for already existing animations and adding to them instead
-            AnimationClip drawAnim = new AnimationClip();
-            AnimationCurve curve = new AnimationCurve(new Keyframe[] { new Keyframe(0, 1), new Keyframe(1f / 60, 1) });
-            drawAnim.SetCurve(ObjectPath.ToString(), typeof(Behaviour), "m_Enabled", curve);
-            fileName = "DrawAnimation" + DateTime.Now.ToString("ddHHmmssfff"); // avoid accidentally replacing older files of the same name
-            AssetDatabase.CreateAsset(drawAnim, "Assets/VRLabs/Marker/GeneratedResources/" + fileName + ".anim");
 
-            AnimationClip resetAnim = new AnimationClip();
-            curve = new AnimationCurve(new Keyframe[] { new Keyframe(0, 0), new Keyframe(1f / 60, 0) });
-            resetAnim.SetCurve((ObjectPath.ToString() + "/Marker/Trail"), typeof(GameObject), "m_IsActive", curve);
-            fileName = "ResetAnimation" + DateTime.Now.ToString("ddHHmmssfff"); // avoid accidentally replacing older files of the same name
-            AssetDatabase.CreateAsset(resetAnim, "Assets/VRLabs/Marker/GeneratedResources/" + fileName + ".anim");
+            AnimationCurve DrawKeyFrame = new AnimationCurve(new Keyframe[] { new Keyframe(0, 1), new Keyframe(1f / 60, 1) });
+            AnimationCurve ResetKeyframe = new AnimationCurve(new Keyframe[] { new Keyframe(0, 0), new Keyframe(1f / 60, 0) });
+            if (marker.AddToCurrentAnimation)
+            {
+                AddCurveToGesture(avatarDescriptor, marker.DrawGesture, ObjectPath.ToString(), typeof(Behaviour), "m_Enabled", DrawKeyFrame);
+                AddCurveToGesture(avatarDescriptor, marker.ResetGesture, (ObjectPath.ToString() + "/Marker/Trail"), typeof(GameObject), "m_IsActive", ResetKeyframe);
+            }
+            else
+            {
+                AnimationClip drawAnim = new AnimationClip();
 
-            SetAnimationGesture(avatarDescriptor, marker.DrawGesture, drawAnim);
-            SetAnimationGesture(avatarDescriptor, marker.ResetGesture, resetAnim);
+                drawAnim.SetCurve(ObjectPath.ToString(), typeof(Behaviour), "m_Enabled", DrawKeyFrame);
+                fileName = "DrawAnimation" + DateTime.Now.ToString("ddHHmmssfff"); // avoid accidentally replacing older files of the same name
+                AssetDatabase.CreateAsset(drawAnim, "Assets/VRLabs/Marker/GeneratedResources/" + fileName + ".anim");
+
+                AnimationClip resetAnim = new AnimationClip();
+
+                resetAnim.SetCurve((ObjectPath.ToString() + "/Marker/Trail"), typeof(GameObject), "m_IsActive", ResetKeyframe);
+                fileName = "ResetAnimation" + DateTime.Now.ToString("ddHHmmssfff"); // avoid accidentally replacing older files of the same name
+                AssetDatabase.CreateAsset(resetAnim, "Assets/VRLabs/Marker/GeneratedResources/" + fileName + ".anim");
+
+                SetAnimationGesture(avatarDescriptor, marker.DrawGesture, drawAnim);
+                SetAnimationGesture(avatarDescriptor, marker.ResetGesture, resetAnim);
+            }
 
             //Remove this component
             DestroyImmediate(marker);
 
         }
 
+        /// <summary>
+        /// Helper function that applies a gesture to an avatar override controller
+        /// </summary>
+        /// <param name="avatar">VRC Avatar</param>
+        /// <param name="gesture">Gesture to override</param>
+        /// <param name="animation">Animation to apply</param>
+        private static void AddCurveToGesture(VRCSDK2.VRC_AvatarDescriptor avatar, Gesture gesture, string relativePath, Type type, string propertyName, AnimationCurve curve)
+        {
+            AnimationClip standingAnimation = null;
+            AnimationClip sittingAnimation = null;
+            string g = GestureString(gesture);
+            AnimationClipOverrides overrides = new AnimationClipOverrides(avatar.CustomStandingAnims.overridesCount);
+            avatar.CustomStandingAnims.GetOverrides(overrides);
+            standingAnimation = overrides[g];
+
+            overrides = new AnimationClipOverrides(avatar.CustomSittingAnims.overridesCount);
+            avatar.CustomSittingAnims.GetOverrides(overrides);
+            sittingAnimation = overrides[g];
+
+            if (standingAnimation == null || sittingAnimation == null)
+            {
+                AnimationClip animation = new AnimationClip();
+                string fileName = type.Name + "Animation" + DateTime.Now.ToString("ddHHmmssfff"); // avoid accidentally replacing older files of the same name
+                AssetDatabase.CreateAsset(animation, "Assets/VRLabs/Marker/GeneratedResources/" + fileName + ".anim");
+
+                if (standingAnimation == null)
+                {
+                    avatar.CustomStandingAnims[g] = standingAnimation = animation;
+                }
+
+                if (sittingAnimation == null)
+                {
+                    avatar.CustomSittingAnims[g] = sittingAnimation = animation;
+                }
+            }
+
+            standingAnimation.SetCurve(relativePath, type, propertyName, curve);
+            sittingAnimation.SetCurve(relativePath, type, propertyName, curve);
+
+            AssetDatabase.SaveAssets();
+        }
 
         /// <summary>
         /// Helper function that applies a gesture to an avatar override controller
@@ -180,29 +234,9 @@ namespace VRLabs.Marker
         /// <param name="animation">Animation to apply</param>
         private static void SetAnimationGesture(VRCSDK2.VRC_AvatarDescriptor avatar, Gesture gesture, AnimationClip animation)
         {
-            switch (gesture)
-            {
-                case Gesture.Fingerpoint:
-                    avatar.CustomStandingAnims["FINGERPOINT"] = animation;
-                    avatar.CustomSittingAnims["FINGERPOINT"] = animation;
-                    break;
-                case Gesture.Victory:
-                    avatar.CustomStandingAnims["VICTORY"] = animation;
-                    avatar.CustomSittingAnims["VICTORY"] = animation;
-                    break;
-                case Gesture.Rocknroll:
-                    avatar.CustomStandingAnims["ROCKNROLL"] = animation;
-                    avatar.CustomSittingAnims["ROCKNROLL"] = animation;
-                    break;
-                case Gesture.Handgun:
-                    avatar.CustomStandingAnims["HANDGUN"] = animation;
-                    avatar.CustomSittingAnims["HANDGUN"] = animation;
-                    break;
-                case Gesture.Thumbsup:
-                    avatar.CustomStandingAnims["THUMBSUP"] = animation;
-                    avatar.CustomSittingAnims["THUMBSUP"] = animation;
-                    break;
-            }
+            string g = GestureString(gesture);
+            avatar.CustomStandingAnims[g] = animation;
+            avatar.CustomSittingAnims[g] = animation;
         }
 
         /// <summary>
@@ -230,6 +264,24 @@ namespace VRLabs.Marker
                 return descriptor;
             }
         }
+
+        /// <summary>
+        /// Helper function to return the name of the gesture given its enum
+        /// </summary>
+        /// <param name="gesture">Gesture enum</param>
+        /// <returns>String of the index of the gesture</returns>
+        private static string GestureString(Gesture gesture)
+        {
+            switch (gesture)
+            {
+                case Gesture.Fingerpoint: return "FINGERPOINT";
+                case Gesture.Victory: return "VICTORY";
+                case Gesture.Rocknroll: return "ROCKNROLL";
+                case Gesture.Handgun: return "HANDGUN";
+                case Gesture.Thumbsup: return "THUMBSUP";
+                default: return "";
+            }
+        }
     }
 
     /// <summary>
@@ -246,6 +298,22 @@ namespace VRLabs.Marker
         public static void Prepend(this StringBuilder str, string x)
         {
             str.Insert(0, x);
+        }
+    }
+
+    public class AnimationClipOverrides : List<KeyValuePair<AnimationClip, AnimationClip>>
+    {
+        public AnimationClipOverrides(int capacity) : base(capacity) { }
+
+        public AnimationClip this[string name]
+        {
+            get { return this.Find(x => x.Key.name.Equals(name)).Value; }
+            set
+            {
+                int index = this.FindIndex(x => x.Key.name.Equals(name));
+                if (index != -1)
+                    this[index] = new KeyValuePair<AnimationClip, AnimationClip>(this[index].Key, value);
+            }
         }
     }
 }
