@@ -2,7 +2,7 @@
 
 [Button Menu](https://github.com/VRLabs/VRChat/releases/download/1/buttonMenu.unitypackage) A touch-based inventory system.
 
-[Circle Slash](https://github.com/VRLabs/VRChat/releases/download/1/circleSlash.unitypackage) Animate with motion. Designed for consecutive slashing effects.
+[Circle Slash](https://github.com/VRLabs/VRChat/releases/download/1/circleSlash.unitypackage) Consecutive slash effects produced by motion.
 
 [Follower](https://github.com/VRLabs/VRChat/releases/download/1/Follower.unitypackage) A world space follower, driven by a root motion engine.
 
