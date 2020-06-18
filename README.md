@@ -1,5 +1,4 @@
-# VRChat
-Public assets for VRChat
+# Downloads
 
 [Button Menu](https://github.com/VRLabs/VRChat/releases/download/1/buttonMenu.unitypackage) A touch-based inventory system.
 
