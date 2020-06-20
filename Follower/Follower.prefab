@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 306651548}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: followerTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 2320226897248308125}
   - component: {fileID: 1818365439825776426}
   - component: {fileID: 7097360204472945138}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4811,7 +4811,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4370237284858087835}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4843,7 +4843,7 @@ GameObject:
   - component: {fileID: 689855437040342748}
   - component: {fileID: 3925163202286821815}
   - component: {fileID: 7046178655287377105}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Stop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4907,7 +4907,7 @@ GameObject:
   - component: {fileID: 1662283399600097595}
   - component: {fileID: 1662283399600097545}
   - component: {fileID: 6825921576060434343}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4980,7 +4980,7 @@ GameObject:
   - component: {fileID: 1873773652180439880}
   - component: {fileID: 1873773652180439887}
   - component: {fileID: 5499127959539678697}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9747,7 +9747,7 @@ GameObject:
   - component: {fileID: 1936133247362178649}
   - component: {fileID: 1936133247362178648}
   - component: {fileID: 530258931453047101}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14548,7 +14548,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7476776870200073175}
   - component: {fileID: 1769560433082932091}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Look
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14598,7 +14598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2059020933509611775}
   - component: {fileID: 2059020933509611768}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: enableContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14651,7 +14651,7 @@ GameObject:
   - component: {fileID: 164326957524107256}
   - component: {fileID: 3150384828770190781}
   - component: {fileID: 5487787743051656930}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14746,7 +14746,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1663652679657163826}
   - component: {fileID: 8359693501507224152}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14792,7 +14792,7 @@ GameObject:
   - component: {fileID: 3131109939093360491}
   - component: {fileID: 8458331603289489340}
   - component: {fileID: 5172102651127170519}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Follower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14889,7 +14889,7 @@ GameObject:
   - component: {fileID: 9158408265559540502}
   - component: {fileID: 9156179295773403391}
   - component: {fileID: 8037461916091571266}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Seat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14993,7 +14993,7 @@ GameObject:
   - component: {fileID: 3467721585374882729}
   - component: {fileID: 5793772168224827550}
   - component: {fileID: 3467721585374882775}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15066,7 +15066,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3467721585453942849}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: lookAtMe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15100,7 +15100,7 @@ GameObject:
   - component: {fileID: 3467721585605769256}
   - component: {fileID: 3467721585605769259}
   - component: {fileID: 7967105528615558526}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Logic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19896,7 +19896,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4089671883335607117}
   - component: {fileID: 4089671883335607114}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: enableContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19949,7 +19949,7 @@ GameObject:
   - component: {fileID: 8535873545856149424}
   - component: {fileID: 8852717708716174083}
   - component: {fileID: 6721261967263172939}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}

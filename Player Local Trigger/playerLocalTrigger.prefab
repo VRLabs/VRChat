@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5422511075215315113}
   - component: {fileID: 5333026711788462559}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: enableContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5422663626578586903}
   - component: {fileID: 5333450838765792865}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: enableContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 5422431035049579723}
   - component: {fileID: 5301727278733779273}
   - component: {fileID: 5301147448149678749}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4867,7 +4867,7 @@ GameObject:
   - component: {fileID: 5332720734793463483}
   - component: {fileID: 5300804121811678783}
   - component: {fileID: 5301889981989897431}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9639,7 +9639,7 @@ GameObject:
   - component: {fileID: 5333462636652905549}
   - component: {fileID: 5327736525031782999}
   - component: {fileID: 5301699282378038459}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Enter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14411,7 +14411,7 @@ GameObject:
   - component: {fileID: 5414821483462760309}
   - component: {fileID: 5404824820490368313}
   - component: {fileID: 5365343021372207061}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14585,7 +14585,7 @@ GameObject:
   - component: {fileID: 7488043188156857830}
   - component: {fileID: 7488043188156857825}
   - component: {fileID: 7488043188156857831}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Entry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19349,7 +19349,7 @@ GameObject:
   - component: {fileID: 7488043188285967953}
   - component: {fileID: 7488043188285967956}
   - component: {fileID: 7488043188285967959}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19427,7 +19427,7 @@ GameObject:
   - component: {fileID: 7488043189175975541}
   - component: {fileID: 7488043189175975540}
   - component: {fileID: 7488043189175975543}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24191,8 +24191,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7488043189225197364}
   - component: {fileID: 7488043189225197365}
-  m_Layer: 12
-  m_Name: playerLocalSystem
+  m_Layer: 0
+  m_Name: playerLocalTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24247,7 +24247,7 @@ GameObject:
   - component: {fileID: 7289330641926313570}
   - component: {fileID: 7289515394027426252}
   - component: {fileID: 7488043188299542593}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
