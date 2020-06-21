@@ -4,6 +4,8 @@
 
 [Circle Slash](https://github.com/VRLabs/VRChat/releases/download/1/circleSlash.unitypackage) Consecutive slash effects produced by motion.
 
+[Cube Sword](https://github.com/VRLabs/VRChat/releases/download/1/cubeSword.unitypackage) A legendary sword made of cubes.
+
 [Follower](https://github.com/VRLabs/VRChat/releases/download/1/Follower.unitypackage) A world space follower, driven by a root motion engine.
 
 [Marker](https://github.com/VRLabs/VRChat/releases/download/1/Marker.unitypackage) An avatar pen that lets you draw in the air.
