@@ -12,7 +12,7 @@
 
 [Player Local Trigger](https://github.com/VRLabs/VRChat/releases/download/1/playerLocalTrigger.unitypackage) Animate on player local collision.
 
-[チーズの剣](https://github.com/VRLabs/VRChat/releases/download/1/swordOfCheese.unitypackage) A katana made by 3d artist "Cheese".
+[チーズの剣](https://github.com/VRLabs/VRChat/releases/download/1/chizuNoKen.unitypackage) A katana made by 3d artist "Cheese".
 
 [World Constraints](https://github.com/VRLabs/VRChat/releases/download/1/worldConstraints.unitypackage) A world fixed object, held in place with constraints.
 
