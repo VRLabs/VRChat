@@ -3797,7 +3797,7 @@ ParticleSystem:
   TriggerModule:
     enabled: 1
     collisionShape0: {fileID: 3694087515329245056}
-    collisionShape1: {fileID: 3789687600520061805}
+    collisionShape1: {fileID: 1857608353349362112}
     collisionShape2: {fileID: 689855437040342748}
     collisionShape3: {fileID: 0}
     collisionShape4: {fileID: 0}
@@ -18858,7 +18858,7 @@ ParticleSystem:
     collisionShape0: {fileID: 1873773652180439881}
     collisionShape1: {fileID: 3694087515329245056}
     collisionShape2: {fileID: 689855437040342748}
-    collisionShape3: {fileID: 0}
+    collisionShape3: {fileID: 3789687600520061805}
     collisionShape4: {fileID: 0}
     collisionShape5: {fileID: 0}
     inside: 0
@@ -19905,7 +19905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3789687600520061805
 Transform:
   m_ObjectHideFlags: 0
