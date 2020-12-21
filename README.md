@@ -10,7 +10,7 @@
 
 [Particle Shader](https://github.com/VRLabs/VRChat-Avatars-2.0/releases/download/1/particleShader.unitypackage) A shader for particle effects.
 
-[Player Local Trigger](https://github.com/VRChat-Avatars-2.0/VRChat/releases/download/1/playerLocalTrigger.unitypackage) Animate on player local collision.
+[Player Local Trigger](https://github.com/VRLabs/VRChat-Avatars-2.0/releases/download/1/playerLocalTrigger.unitypackage) Animate on player local collision.
 
 [チーズの剣](https://github.com/VRLabs/VRChat-Avatars-2.0/releases/download/1/chizuNoKen.unitypackage) A katana made by 3d artist "Cheese".
 
